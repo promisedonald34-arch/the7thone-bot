@@ -1,6 +1,13 @@
 {
+  "name": "the7thone-bot",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
   "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.34.7"
+    "puppeteer": "^22.6.2"
   }
 }
