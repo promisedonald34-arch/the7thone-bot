@@ -1,10 +1,12 @@
 {
   "name": "the7thone-bot",
   "version": "1.0.0",
-  "type": "module",
-  "scripts": { "start": "node server.js" },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.18",
-    "pino": "^9.3.2"
+    "@whiskeysockets/baileys": "6.5.0",
+    "pino": "^8.16.0"
   }
 }
