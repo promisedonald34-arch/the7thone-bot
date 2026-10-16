@@ -1,14 +1,15 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
-const client = new Client(
-        puppeteer: {
+
+const client = new Client({
+    puppeteer: {
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
     },
     authStrategy: new LocalAuth(),
-    webversionCache: {
+    webVersionCache: {
         type: 'remote',
-        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.3000.1015901307-alpha.html',
+        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.3000.1015901307-alpha.html'
     }
 });
 
@@ -89,10 +90,10 @@ client.on('message', async msg => {
         msg.reply(ICONIC.price);
     } else if (text.includes('location') || text.includes('where')) {
         msg.reply(ICONIC.location);
-    } else if (text.includes('order') || text.includes('boss') || text.includes('order')) {
+    } else if (text.includes('order') || text.includes('boss')) {
         msg.reply(ICONIC.order);
     } else {
-        msg.reply('You said: ' + msg.body + '\n\nI only understand: MENU | PRICE | LOCATION | OWNER');
+        msg.reply('You said: ' + msg.body + '\n\nI only understand: MENU | PRICE | LOCATION | ORDER');
     }
 });
 
