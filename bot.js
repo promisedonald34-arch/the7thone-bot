@@ -1,10 +1,14 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
-
-const client = new Client({
+const client = new Client(
+        puppeteer: {
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath:
+            process.env.PUPPETEER_EXECUTABLE_PATH
+    },
     authStrategy: new LocalAuth(),
-    puppeteer: { headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] },
-    webVersionCache: {
+    webversionCache: {
         type: 'remote',
         remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.3000.1015901307-alpha.html',
     }
