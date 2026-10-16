@@ -1,7 +1,7 @@
 import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@whiskeysockets/baileys';
 import P from 'pino';
 
-const PHONE_NUMBER = '234XXXXXXXXXX'; // <--- PUT YOUR BUSINESS NUMBER HERE, with country code, no +. Example 2348123456789
+const PHONE_NUMBER = '2348141216819'; // <--- PUT YOUR BUSINESS NUMBER HERE, with country code, no +. Example 2348123456789
 
 async function startBot() {
     const { state, saveCreds } = await useMultiFileAuthState('auth');
