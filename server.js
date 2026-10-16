@@ -1,9 +1,15 @@
 const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys')
 const P = require('pino')
+const express = require('express')
+
+// Fake web server to keep Render happy
+const app = express()
+const PORT = process.env.PORT || 10000
+app.get('/', (req, res) => res.send('THE7THONE BOT IS LIVE!'))
+app.listen(PORT, () => console.log(`Server on port ${PORT}`))
 
 const PREFIX = process.env.PREFIX || '.'
 const BOT_NAME = process.env.BOT_NAME || 'THE7THONE'
-const OWNER = process.env.OWNER_NUMBER || '2348141216819'
 
 async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState('auth')
@@ -15,19 +21,7 @@ async function startBot() {
   })
   sock.ev.on('creds.update', saveCreds)
   sock.ev.on('connection.update', (u) => {
-    if(u.connection === 'open') console.log(`✅ ${BOT_NAME} IS LIVE ON RENDER!`)
-  })
-  sock.ev.on('messages.upsert', async ({ messages }) => {
-    const msg = messages[0]
-    if(!msg.message || msg.key.fromMe) return
-    const text = msg.message.conversation || msg.message.extendedTextMessage?.text || ''
-    const jid = msg.key.remoteJid
-    if(text === 'hi' || text === `${PREFIX}hi`) {
-      await sock.sendMessage(jid, { text: `Hey! ${BOT_NAME} online 🤖\nTry ${PREFIX}menu` })
-    }
-    if(text === `${PREFIX}menu`) {
-      await sock.sendMessage(jid, { text: `*${BOT_NAME} MENU*\n${PREFIX}hi\n${PREFIX}menu\n${PREFIX}ping` })
-    }
+    if(u.connection === 'open') console.log(`✅ ${BOT_NAME} IS LIVE! Scan QR above`)
   })
 }
 startBot()
