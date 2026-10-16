@@ -2,12 +2,12 @@
   "name": "the7thone-bot",
   "version": "1.0.0",
   "type": "module",
-  "main": "bot.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.8",
+    "@whiskeysockets/baileys": "^6.7.18",
     "qrcode-terminal": "^0.12.0",
     "pino": "^9.3.2"
   }
