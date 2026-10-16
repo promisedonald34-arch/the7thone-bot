@@ -1,6 +1,6 @@
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
-const qrcode = require('qrcode-terminal');
-const P = require('pino');
+import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@whiskeysockets/baileys';
+import qrcode from 'qrcode-terminal';
+import P from 'pino';
 
 async function startBot() {
     const { state, saveCreds } = await useMultiFileAuthState('auth');
@@ -22,6 +22,7 @@ async function startBot() {
         }
         if (connection === 'close') {
             const shouldReconnect = lastDisconnect?.error?.output?.statusCode!== DisconnectReason.loggedOut;
+            console.log('Connection closed, reconnecting:', shouldReconnect);
             if (shouldReconnect) startBot();
         } else if (connection === 'open') {
             console.log('✅ The7thOne Bot is LIVE!');
@@ -36,11 +37,10 @@ async function startBot() {
         const text = (msg.message.conversation || msg.message.extendedTextMessage?.text || '').toLowerCase().trim();
 
         let reply = '';
-
-        if (text === 'hi' || text === 'hello' || text === 'menu' || text === '0') {
+        if (['hi','hello','menu','0'].includes(text)) {
             reply = `Welcome to *THE 7TH ONE* 🖤\n\nHow can we help you today?\n\n*1* - View Products / Catalog\n*2* - Place an Order\n*3* - Track Order\n*4* - Talk to Customer Care\n\nReply with a number.`;
         } else if (text === '1') {
-            reply = `🛍️ *Our Collection*\n\nCheck our catalog here: [Paste your Instagram / Website link]\n\nOr tell us what you need: Shirts, Pants, Sets?\n\nReply *2* to Order.`;
+            reply = `🛍️ *Our Collection*\n\nCheck our catalog here: [Paste your Instagram/Website link]\n\nOr tell us what you need: Shirts, Pants, Sets?\n\nReply *2* to Order.`;
         } else if (text === '2') {
             reply = `📦 *To Place Order*\n\nSend:\n- Product Name / Screenshot\n- Size\n- Delivery Address\n- Phone Number\n\nWe will confirm price + delivery fee.`;
         } else if (text === '3') {
