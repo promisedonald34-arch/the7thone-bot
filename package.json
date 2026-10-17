@@ -1,6 +1,7 @@
 {
   "name": "the7thone-bot",
   "version": "1.0.0",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
